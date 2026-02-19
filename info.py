@@ -35,8 +35,8 @@ PICS = (environ.get('PICS', 'https://graph.org/file/fa4a5a0a68db76100301e-914baa
 NOR_IMG = environ.get("NOR_IMG", "https://graph.org/file/e20b5fdaf217252964202.jpg")
 MELCOW_PHOTO = environ.get("MELCOW_PHOTO", "https://graph.org/file/83d8b6d48d5b44e3bb2b0-3abdf31d3f4a1b12d0.jpg")
 SPELL_IMG = environ.get("SPELL_IMG", "https://graph.org/file/13702ae26fb05df52667c.jpg")
-SUBSCRIPTION = (environ.get('SUBSCRIPTION', 'https://i.ibb.co/PvbbCGBJ/20260217-180408.jpg'))
-FSUB_PICS = (environ.get('FSUB_PICS', 'https://i.ibb.co/1tNVFkRX/1771451505647.png https://i.ibb.co/1tNVFkRX/1771451505647.png')).split()  # Fsub pic
+SUBSCRIPTION = (environ.get('SUBSCRIPTION', 'https://graph.org/file/7e7dedc34ebdacb553bcd-f5444a94d5c3a14385.jpg'))
+FSUB_PICS = (environ.get('FSUB_PICS', 'https://graph.org/file/33fca1f5101b22a351ff6-53bdd67d55cb33252f.jpg https://graph.org/file/33fca1f5101b22a351ff6-53bdd67d55cb33252f.jpg')).split()  # Fsub pic
 
 # ============================
 # Admin, Channels & Users Configuration
