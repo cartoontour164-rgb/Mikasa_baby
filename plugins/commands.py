@@ -1379,3 +1379,53 @@ async def reset_trial(client, message):
         await message.reply_text(message_text)
     except Exception as e:
         await message.reply_text(f"An error occurred: {e}")
+        
+@Client.on_message(filters.command("smart_clean") & filters.user(ADMINS))
+async def smart_clean_duplicates(bot, message):
+    msg = await message.reply("🧹 Scanning for exact duplicates (matching Name AND Size)... Please wait.")
+    
+    # MongoDB Aggregation to find duplicates based on BOTH name and size
+    pipeline = [
+        {
+            "$group": {
+                "_id": {
+                    "file_name": "$file_name",
+                    "file_size": "$file_size"
+                },
+                "ids": {"$push": "$_id"},
+                "count": {"$sum": 1}
+            }
+        },
+        {
+            "$match": {
+                "count": {"$gt": 1}
+            }
+        }
+    ]
+    
+    try:
+        # Check Primary Database
+        duplicate_groups_1 = await Media.collection.aggregate(pipeline).to_list(length=None)
+        
+        deleted_count = 0
+        
+        # Delete duplicates in Primary DB (keeping the first one)
+        for group in duplicate_groups_1:
+            ids_to_delete = group["ids"][1:]
+            result = await Media.collection.delete_many({"_id": {"$in": ids_to_delete}})
+            deleted_count += result.deleted_count
+            
+        # Check Secondary Database (if MULTIPLE_DB is active)
+        if MULTIPLE_DB:
+            duplicate_groups_2 = await Media2.collection.aggregate(pipeline).to_list(length=None)
+            for group in duplicate_groups_2:
+                ids_to_delete = group["ids"][1:]
+                result = await Media2.collection.delete_many({"_id": {"$in": ids_to_delete}})
+                deleted_count += result.deleted_count
+                
+        await msg.edit(f"✅ **Smart Cleanup Complete!**\n🗑️ Removed `{deleted_count}` exact duplicate entries.\n\n*(Episodes with the same name but different sizes were ignored!)*")
+        
+    except Exception as e:
+        await msg.edit(f"❌ **Error during cleanup:** `{e}`")
+        logger.error(f"Smart Clean Error: {e}")
+        
