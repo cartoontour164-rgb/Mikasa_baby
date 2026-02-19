@@ -6,6 +6,7 @@ from urllib.parse import quote_plus
 import logging
 from database.ia_filterdb import Media, Media2, get_file_details, get_search_results, get_bad_files
 from database.config_db import mdb
+from pymongo import DeleteOne
 from pyrogram.errors import FloodWait, UserIsBlocked, MessageNotModified, PeerIdInvalid, ChatAdminRequired, UserNotParticipant
 from pyrogram import Client, filters, enums
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InputMediaPhoto, WebAppInfo
@@ -149,7 +150,44 @@ async def pm_text(bot, message):
     except Exception:
         pass
 
+@Client.on_message(filters.command("clean_duplicates") & filters.user(ADMINS))
+async def clean_duplicates(client, message):
+    msg = await message.reply_text("<b>Starting Database Cleanup... 🧹</b>")
+    total_deleted = 0
+    
+    # This loop works for both your current single DB and any future secondary URI
+    for db_class in [Media, Media2]:
+        pipeline = [
+            {
+                "$group": {
+                    "_id": "$file_id", 
+                    "count": {"$sum": 1}, 
+                    "docs": {"$push": "$_id"}
+                }
+            },
+            {"$match": {"count": {"$gt": 1}}}
+        ]
+        
+        # Accesses the collection safely through your umongo Document classes
+        duplicates = await db_class.collection.aggregate(pipeline).to_list(length=None)
+        
+        if duplicates:
+            delete_ops = []
+            for entry in duplicates:
+                # Keeps the original entry and marks clones for deletion
+                to_delete = entry['docs'][1:] 
+                for doc_id in to_delete:
+                    delete_ops.append(DeleteOne({"_id": doc_id}))
+            
+            if delete_ops:
+                result = await db_class.collection.bulk_write(delete_ops)
+                total_deleted += result.deleted_count
 
+    if total_deleted > 0:
+        await msg.edit(f"<b>Cleanup Complete! ✅\n\nRemoved {total_deleted} duplicate entries.</b>")
+    else:
+        await msg.edit("<b>Database is already clean! ✨</b>")
+        
 @Client.on_callback_query(filters.regex(r"^reffff"))
 async def refercall(bot, query):
     btn = [[
