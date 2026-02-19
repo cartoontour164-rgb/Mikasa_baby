@@ -224,7 +224,7 @@ Nᴀᴍᴇ : {}
 
 Mᴇꜱꜱᴀɢᴇ : <b>{}</b>"""
     
-    CAPTION = """<b><a href="https://t.me/updates_op">{file_name}</a></b>\n\n<b>⚜️ Powered By : <a href="https://t.me/iP_Update">[ iP Update ]</a></b>"""
+    CAPTION = """<b><a href="https://t.me/updates_op">{file_name}</a></b>\n\n<b>⚜️ Powered By : <a href="https://t.me/scout_regimant">[ Scout Regiment ]</a></b>"""
 
     
     MOVIE_UPDATE_NOTIFY_TXT = """
