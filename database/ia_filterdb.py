@@ -98,14 +98,27 @@ async def save_file(media):
         r"[_\-\.#+$%^&*()!~`,;:\"'?/<>\[\]{}=|\\]", " ", str(media.file_name)
     )
 
+    # --- SMART DUPLICATE CHECK ---
+    search_query = {
+        "$or": [
+            {"file_id": file_id},
+            {"file_name": file_name, "file_size": media.file_size}
+        ]
+    }
+    
+    if await Media.count_documents(search_query, limit=1):
+        logger.info(f"[SKIP] '{file_name}' (or identical content) already in Primary DB.")
+        return False, 0
+        
+    if MULTIPLE_DB and await Media2.count_documents(search_query, limit=1):
+        logger.info(f"[SKIP] '{file_name}' (or identical content) already in Secondary DB.")
+        return False, 0
+    # -----------------------------
+
     saveMedia = Media
     target_db = "Primary"
     if MULTIPLE_DB:
         try:
-            exists = await Media.count_documents({"file_id": file_id}, limit=1)
-            if exists:
-                logger.info(f"[SKIP] '{file_name}' already in Primary DB.")
-                return False, 0
             primary_db_size = await check_db_size(db)
             if primary_db_size >= 407:
                 saveMedia = Media2
@@ -113,8 +126,9 @@ async def save_file(media):
                 logger.warning("Switching to Secondary DB due to size threshold.")
         except Exception as e:
             logger.error(
-                "Error during MULTIPLE_DB check; defaulting to primary DB.", exc_info=e
+                "Error during MULTIPLE_DB size check; defaulting to primary DB.", exc_info=e
             )
+
     try:
         record = saveMedia(
             file_id=file_id,
