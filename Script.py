@@ -155,11 +155,11 @@ Nᴀᴍᴇ - {}
 
 📝 ᴍᴏᴠɪᴇ ʀᴇǫᴜᴇꜱᴛ ꜰᴏʀᴍᴀᴛ 👇
 
-⚜️ ᴇxᴀᴍᴘʟᴇ : Jawan or Jawan 2023 
+⚜️ ᴇxᴀᴍᴘʟᴇ : Your Name or Your Name 2016
 
 📝 ꜱᴇʀɪᴇꜱ ʀᴇǫᴜᴇꜱᴛ ꜰᴏʀᴍᴀᴛ 👇
 
-⚜️ ᴇxᴀᴍᴘʟᴇ : Loki S01 or Loki S01E04 or Lucifer S03E24
+⚜️ ᴇxᴀᴍᴘʟᴇ : Vincenzo S01 or Vincenzo S01E04 or Vinland Saga S02E05
 
 🚯 ᴅᴏɴᴛ ᴜꜱᴇ ➠ ':(!,./)</b>"""
     
@@ -348,7 +348,7 @@ sʜᴏᴡɴ ɪɴ : {remaining_seconds} <i>sᴇᴄ</i>⚡️
 
 ◉ 07 ᴅᴀʏꜱ - 10 ₹  
 ◉ 15 ᴅᴀʏꜱ - 20 ₹  
-◉ 30 ᴅᴀʏꜱ - 40 ₹  
+◉ 30 ᴅᴀʏꜱ - 29 ₹  
 ◉ 45 ᴅᴀʏꜱ - 55 ₹  
 ◉ 60 ᴅᴀʏꜱ - 75 ₹  
 
