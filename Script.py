@@ -400,8 +400,10 @@ sʜᴏᴡɴ ɪɴ : {remaining_seconds} <i>sᴇᴄ</i>⚡️
 
     SOURCE_TXT ="""<b>ՏᑌᑭᑭOᖇT ᑌՏ : 🙂‍↕️ </b>
 
-This Is A Scout Regiment Project. We hope our bot is helping you alot.\n
-ꜱᴜᴘᴘᴏʀᴛ ᴜs ◉› :<a href=https://t.me/Mikasa_animexbot>Mikasa</a>\n """
+Help us keep Mikasa fast and online 24/7! 
+
+Running massive databases and premium servers to bring you unlimited anime and movies costs money. 100% of your donations go directly toward server maintenance and keeping the bot running flawlessly. \n
+Support ☕︎› :<a href=https://t.me/Mikasa_animexbot>Mikasa</a>\n """
 
     SETTING_TXT = """    
 <u>ꜱᴇᴛᴛɪɴɢꜱ</u> :
