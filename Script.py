@@ -401,7 +401,7 @@ sʜᴏᴡɴ ɪɴ : {remaining_seconds} <i>sᴇᴄ</i>⚡️
     SOURCE_TXT ="""<b>ՏᑌᑭᑭOᖇT ᑌՏ : 🙂‍↕️ </b>
 
 This Is A Scout Regiment Project. We hope our bot is helping you alot.\n
-ꜱᴜᴘᴘᴏʀᴛ ᴜs ◉› :<a href={}>Mikasa</a>\n """
+ꜱᴜᴘᴘᴏʀᴛ ᴜs ◉› :<a href=https://t.me/Mikasa_animexbot>Mikasa</a>\n """
 
     SETTING_TXT = """    
 <u>ꜱᴇᴛᴛɪɴɢꜱ</u> :
