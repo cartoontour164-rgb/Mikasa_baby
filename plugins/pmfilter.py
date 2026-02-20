@@ -638,7 +638,7 @@ async def languages_cb_handler(client: Client, query: CallbackQuery):
         pass
 
     _, key = query.data.split("#")
-    search = FRESH.get(key).replace('_', ' ')
+    search = (BUTTONS.get(key) or FRESH.get(key)).replace('_', ' ')
 
     # -- DYNAMIC LOGIC START --
     await query.answer("🔄 Cʜᴇᴄᴋɪɴɢ Dᴀᴛᴀʙᴀsᴇ...", show_alert=False)
@@ -812,7 +812,7 @@ async def seasons_cb_handler(client: Client, query: CallbackQuery):
         pass
 
     _, key = query.data.split("#")
-    search = FRESH.get(key).replace('_', ' ')
+    search = (BUTTONS.get(key) or FRESH.get(key)).replace('_', ' ')
 
     # -- DYNAMIC LOGIC START --
     await query.answer("🔄 Cʜᴇᴄᴋɪɴɢ Dᴀᴛᴀʙᴀsᴇ...", show_alert=False)
