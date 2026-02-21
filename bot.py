@@ -54,8 +54,8 @@ async def dreamxbotz_start():
             spec.loader.exec_module(load)
             sys.modules["plugins." + plugin_name] = load
             print("DreamxBotz Imported => " + plugin_name)
-    if ON_HEROKU:
-        asyncio.create_task(ping_server()) 
+#    if ON_HEROKU:
+#        asyncio.create_task(ping_server()) 
     b_users, b_chats = await db.get_banned()
     temp.BANNED_USERS = b_users
     temp.BANNED_CHATS = b_chats
@@ -84,7 +84,7 @@ async def dreamxbotz_start():
     await app.setup()
     bind_address = "0.0.0.0"
     await web.TCPSite(app, bind_address, PORT).start()
-    dreamxbotz.loop.create_task(keep_alive())
+#    dreamxbotz.loop.create_task(keep_alive())
     await idle()
     
 if __name__ == '__main__':
