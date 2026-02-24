@@ -48,8 +48,10 @@ async def fetch_database_options(chat_id, search_query):
     available = {
         "qualities": set(),
         "languages": set(),
-        "seasons": set()
+        "seasons": set(),
+        "raw_files": files # Keep track of files to check for missing info
     }
+
     
     if not files:
         return available
@@ -653,8 +655,9 @@ async def languages_cb_handler(client: Client, query: CallbackQuery):
 
     btn = []
     if not available_langs:
-         # Fallback: Show all languages if detection fails
-        items = list(LANGUAGES.items())
+        await query.answer("🌍 I couldn't detect a language tag. If this is an international book, please check the title manually!", show_alert=True)
+        return
+
         for i in range(0, len(items), 2):
             name1, code1 = items[i]
             row = [InlineKeyboardButton(text=name1, callback_data=f"fl#{code1}#{key}")]
@@ -828,24 +831,24 @@ async def seasons_cb_handler(client: Client, query: CallbackQuery):
 
     btn = []
     if not available_seasons:
-        # If no specific "S01" pattern is found, we can't display season buttons safely.
-        # Fallback to standard list if you want, or just show a message.
-        # Here we try to show standard list up to 5 as a backup
-        available_seasons = [i for i in range(1, 6)]
+        await query.answer("🧐 No specific Volumes/Editions detected. Please check the file list manually!", show_alert=True)
+        return
+
 
     # Generate Buttons for Available Seasons
     for i in range(0, len(available_seasons), 3): # 3 buttons per row looks better for numbers
         row = []
         s1 = available_seasons[i]
-        row.append(InlineKeyboardButton(f"Sᴇᴀꜱᴏɴ {s1}", callback_data=f"fs#S{str(s1).zfill(2)}#{key}"))
+        row.append(InlineKeyboardButton(f"Vᴏʟ {s1}", callback_data=f"fs#S{str(s1).zfill(2)}#{key}"))
         
         if i + 1 < len(available_seasons):
             s2 = available_seasons[i + 1]
-            row.append(InlineKeyboardButton(f"Sᴇᴀꜱᴏɴ {s2}", callback_data=f"fs#S{str(s2).zfill(2)}#{key}"))
+            row.append(InlineKeyboardButton(f"Vᴏʟ {s2}", callback_data=f"fs#S{str(s2).zfill(2)}#{key}"))
             
         if i + 2 < len(available_seasons):
             s3 = available_seasons[i + 2]
-            row.append(InlineKeyboardButton(f"Sᴇᴀꜱᴏɴ {s3}", callback_data=f"fs#S{str(s3).zfill(2)}#{key}"))
+            row.append(InlineKeyboardButton(f"Vᴏʟ {s3}", callback_data=f"fs#S{str(s3).zfill(2)}#{key}"))
+
             
         btn.append(row)
 
