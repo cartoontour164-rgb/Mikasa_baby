@@ -2,7 +2,8 @@ import time
 import re
 import os
 from pyrogram import Client, filters, enums
-from info import BIN_CHANNEL
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton # Added this
+from info import BIN_CHANNEL, ADMINS # Added ADMINS here
 from database.users_chats_db import db
 from Script import script
 
@@ -27,9 +28,6 @@ async def contribute_file(client, message):
             )
     # --- END OF EDIT ---
 
-    # 1. Cooldown Check (The rest of your code continues here...)
-    last_time = upload_cooldown.get(user_id, 0)
-    
     # 1. Cooldown Check
     last_time = upload_cooldown.get(user_id, 0)
     if current_time - last_time < 30:
@@ -63,4 +61,3 @@ async def contribute_file(client, message):
     await db.add_contribution(user_id)
     
     await message.reply_text("✅ **Contribution Accepted!** Thank you for sharing knowledge. Check /my_profile!")
-      
