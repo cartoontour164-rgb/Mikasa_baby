@@ -257,7 +257,7 @@ async def next_page(bot, query):
         btn.insert(0,
                    [
                        InlineKeyboardButton(
-                           f'Qᴜᴀʟɪᴛʏ', callback_data=f"qualities#{key}"),
+                           f'Fᴏʀᴍᴀᴛ', callback_data=f"qualities#{key}"),
                        InlineKeyboardButton(
                            "Lᴀɴɢᴜᴀɢᴇ", callback_data=f"languages#{key}"),
                        InlineKeyboardButton(
@@ -279,7 +279,7 @@ async def next_page(bot, query):
         btn.insert(0,
                    [
                        InlineKeyboardButton(
-                           f'Qᴜᴀʟɪᴛʏ', callback_data=f"qualities#{key}"),
+                           f'Fᴏʀᴍᴀᴛ', callback_data=f"qualities#{key}"),
                        InlineKeyboardButton(
                            "Lᴀɴɢᴜᴀɢᴇ", callback_data=f"languages#{key}"),
                        InlineKeyboardButton(
@@ -494,7 +494,7 @@ async def qualities_cb_handler(client: Client, query: CallbackQuery):
             row.append(InlineKeyboardButton(text=q2, callback_data=f"fq#{q2.lower()}#{key}"))
         btn.append(row)
 
-    btn.insert(0, [InlineKeyboardButton(text="⇊ ꜱᴇʟᴇᴄᴛ ǫᴜᴀʟɪᴛʏ ⇊", callback_data="ident")])
+    btn.insert(0, [InlineKeyboardButton(text="⇊ ꜱᴇʟᴇᴄᴛ ꜰᴏʀᴍᴀᴛ ⇊", callback_data="ident")])
     btn.append([InlineKeyboardButton(text="↭ ʙᴀᴄᴋ ᴛᴏ ꜰɪʟᴇs ↭", callback_data=f"fq#homepage#{key}")])
 
     await query.edit_message_reply_markup(InlineKeyboardMarkup(btn))
@@ -548,7 +548,7 @@ async def filter_qualities_cb_handler(client: Client, query: CallbackQuery):
         btn.insert(0,
                    [
                        InlineKeyboardButton(
-                           f'Qᴜᴀʟɪᴛʏ', callback_data=f"qualities#{key}"),
+                           f'Fᴏʀᴍᴀᴛ', callback_data=f"qualities#{key}"),
                        InlineKeyboardButton(
                            "Lᴀɴɢᴜᴀɢᴇ", callback_data=f"languages#{key}"),
                        InlineKeyboardButton(
@@ -567,7 +567,7 @@ async def filter_qualities_cb_handler(client: Client, query: CallbackQuery):
         btn.insert(0,
                    [
                        InlineKeyboardButton(
-                           f'Qᴜᴀʟɪᴛʏ', callback_data=f"qualities#{key}"),
+                           f'Fᴏʀᴍᴀᴛ', callback_data=f"qualities#{key}"),
                        InlineKeyboardButton(
                            "Lᴀɴɢᴜᴀɢᴇ", callback_data=f"languages#{key}"),
                        InlineKeyboardButton(
@@ -728,7 +728,7 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
         btn.insert(0,
                    [
                        InlineKeyboardButton(
-                           f'Qᴜᴀʟɪᴛʏ', callback_data=f"qualities#{key}"),
+                           f'Fᴏʀᴍᴀᴛ', callback_data=f"qualities#{key}"),
                        InlineKeyboardButton(
                            "Lᴀɴɢᴜᴀɢᴇ", callback_data=f"languages#{key}"),
                        InlineKeyboardButton(
@@ -748,7 +748,7 @@ async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
         btn.insert(0,
                    [
                        InlineKeyboardButton(
-                           f'Qᴜᴀʟɪᴛʏ', callback_data=f"qualities#{key}"),
+                           f'Fᴏʀᴍᴀᴛ', callback_data=f"qualities#{key}"),
                        InlineKeyboardButton(
                            "Lᴀɴɢᴜᴀɢᴇ", callback_data=f"languages#{key}"),
                        InlineKeyboardButton(
@@ -912,7 +912,7 @@ async def filter_seasons_cb_handler(client: Client, query: CallbackQuery):
     btn.insert(
         0,
         [
-            InlineKeyboardButton("Qᴜᴀʟɪᴛʏ", callback_data=f"qualities#{key}"),
+            InlineKeyboardButton("Fᴏʀᴍᴀᴛ", callback_data=f"qualities#{key}"),
             InlineKeyboardButton("Lᴀɴɢᴜᴀɢᴇ", callback_data=f"languages#{key}"),
             InlineKeyboardButton("Sᴇᴀꜱᴏɴ", callback_data=f"seasons#{key}"),
         ],
@@ -1976,7 +1976,7 @@ async def auto_filter(client, msg, spoll=False):
             btn.insert(0,
                        [
                            InlineKeyboardButton(
-                               f'Qᴜᴀʟɪᴛʏ', callback_data=f"qualities#{key}"),
+                               f'Fᴏʀᴍᴀᴛ', callback_data=f"qualities#{key}"),
                            InlineKeyboardButton(
                                "Lᴀɴɢᴜᴀɢᴇ", callback_data=f"languages#{key}"),
                            InlineKeyboardButton(
@@ -1996,7 +1996,7 @@ async def auto_filter(client, msg, spoll=False):
             btn.insert(0,
                        [
                            InlineKeyboardButton(
-                               f'Qᴜᴀʟɪᴛʏ', callback_data=f"qualities#{key}"),
+                               f'Fᴏʀᴍᴀᴛ', callback_data=f"qualities#{key}"),
                            InlineKeyboardButton(
                                "Lᴀɴɢᴜᴀɢᴇ", callback_data=f"languages#{key}"),
                            InlineKeyboardButton(
