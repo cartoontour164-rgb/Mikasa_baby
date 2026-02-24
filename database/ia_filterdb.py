@@ -94,9 +94,19 @@ async def save_file(media):
         logger.error(f"[REJECTED] '{media.file_name}' has a null file_id. Skipping save.")
         return False, 2 
 
+    # 1. Fallback Logic: If there is no file_name, try to use the caption, or use a default tag.
+    raw_name = getattr(media, "file_name", None)
+    if not raw_name:
+        # If it's just a raw video, grab the caption or name it "Scraped_Video"
+        raw_name = getattr(media, "caption", "Scraped_Video")
+        # If there's no caption either, force a default name
+        if not raw_name:
+            raw_name = "Scraped_Video"
+
+    # 2. Clean the name
     file_name = re.sub(
-        r"[_\-\.#+$%^&*()!~`,;:\"'?/<>\[\]{}=|\\]", " ", str(media.file_name)
-    )
+        r"[_\-\.#+$%^&*()!~`,;:\"'?/<>\[\]{}=|\\]", " ", str(raw_name)
+    ).strip()
 
     # --- SMART DUPLICATE CHECK ---
     search_query = {
