@@ -58,23 +58,12 @@ DATABASE_URI2 = environ.get('DATABASE_URI2', "")
 # ============================
 # Library & International Logic
 # ============================
-# Updated for International Publishing Standards
 LANGUAGES = {
-    "ᴇɴɢʟɪsʜ": "eng", 
-    "ʜɪɴᴅɪ": "hin", 
-    "ᴀʀᴀʙɪᴄ": "ara", 
-    "ʀᴜssɪᴀɴ": "rus", 
-    "ғʀᴇɴᴄʜ": "fre", 
-    "ᴊᴀᴘᴀɴᴇsᴇ": "jpn", 
-    "sᴘᴀɴɪsʜ": "spa", 
-    "ɢᴇʀᴍᴀɴ": "ger", 
-    "ᴋᴏʀᴇᴀɴ": "kor"
+    "ᴇɴɢʟɪsʜ": "eng", "ʜɪɴᴅɪ": "hin", "ᴀʀᴀʙɪᴄ": "ara", 
+    "ʀᴜssɪᴀɴ": "rus", "ғʀᴇɴᴄʜ": "fre", "ᴊᴀᴘᴀɴᴇsᴇ": "jpn", 
+    "sᴘᴀɴɪsʜ": "spa", "ɢᴇʀᴍᴀɴ": "ger", "ᴋᴏʀᴇᴀɴ": "kor"
 }
-
-# Swapped resolutions for book formats
 QUALITIES = ["PDF", "EPUB", "MOBI", "CBZ", "ZIP"]
-
-# Swapped Seasons for Volumes
 SEASON_COUNT = 150 
 SEASONS = [f"Vol {i}" for i in range(1, SEASON_COUNT + 1)]
 
@@ -86,6 +75,22 @@ SHORTENER_API = environ.get("SHORTENER_API", "")
 SHORTENER_WEBSITE = environ.get("SHORTENER_WEBSITE", "")
 TWO_VERIFY_GAP = int(environ.get('TWO_VERIFY_GAP', "1200"))
 THREE_VERIFY_GAP = int(environ.get('THREE_VERIFY_GAP', "54000"))
+
+# ============================
+# Server & Web Configuration (FIXED)
+# ============================
+PORT = int(environ.get("PORT", "8080"))
+NO_PORT = bool(environ.get('NO_PORT', False))
+APP_NAME = environ.get('APP_NAME', None)
+BIND_ADRESS = str(getenv('WEB_SERVER_BIND_ADDRESS', '0.0.0.0'))
+FQDN = str(getenv('FQDN', BIND_ADRESS))
+
+if 'DYNO' in environ:
+    URL = "https://{}.herokuapp.com/".format(APP_NAME) if APP_NAME else "https://{}/".format(FQDN)
+else:
+    URL = "https://{}/".format(FQDN) if NO_PORT else "https://{}:{}/".format(FQDN, PORT)
+
+URL = environ.get('URL', URL)
 
 # ============================
 # Global Links
@@ -101,14 +106,14 @@ ULTRA_FAST_MODE = is_enabled(environ.get('ULTRA_FAST_MODE', "True"), True)
 MAX_B_TN = environ.get("MAX_B_TN", "5")
 DELETE_TIME = int(environ.get("DELETE_TIME", "300"))
 CUSTOM_FILE_CAPTION = environ.get("CUSTOM_FILE_CAPTION", f"{script.CAPTION}")
-IMDB = False # Disabled for books to save bandwidth
+IMDB = False 
 PM_SEARCH = True
 EMOJI_MODE = False
 
-# Don't Change Anything Here
 if MULTIPLE_DB == False:
     DATABASE_URI = DATABASE_URI
     DATABASE_URI2 = DATABASE_URI
 else:
     DATABASE_URI = DATABASE_URI
     DATABASE_URI2 = DATABASE_URI2
+    
