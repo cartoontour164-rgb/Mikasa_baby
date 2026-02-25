@@ -34,9 +34,6 @@ class script(object):
 🚀 ꜰᴏʟʟᴏᴡ ᴛʜᴇꜱᴇ ꜱᴛᴇᴘꜱ!
 </b>"""
 
-    INDEX_START_TXT = "⏳ <b>Indexing Started...</b> from ID {}"
-    INDEX_COMPLETE_TXT = "✅ <b>Indexing Complete!</b>\n\n📥 Saved: `{}`\n⏭ Skipped: `{}`"
-    
     ABOUT_TXT = """<b>╭────[ ᴍʏ ᴅᴇᴛᴀɪʟs ]────⍟
 ├⍟ Mʏ Nᴀᴍᴇ : <a href=https://t.me/{}>{}</a>
 ├⍟ Dᴇᴠᴇʟᴏᴘᴇʀ : <a href={}>ᴏᴡɴᴇʀ</a> 
@@ -545,3 +542,4 @@ Support ☕︎› :<a href=https://t.me/Mikasa_animexbot>Mikasa</a>\n """
 • 𝟹𝟶-ꜱᴇᴄᴏɴᴅ ᴄᴏᴏʟᴅᴏᴡɴ ʙᴇᴛᴡᴇᴇɴ ᴜᴘʟᴏᴀᴅꜱ.
 • ꜰɪʟᴇꜱ ᴡɪᴛʜ ᴡʀᴏɴɢ ɴᴀᴍᴇꜱ ᴡɪʟʟ ʙᴇ ʀᴇᴊᴇᴄᴛᴇᴅ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ!"""
 
+    
