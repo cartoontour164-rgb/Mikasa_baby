@@ -141,6 +141,27 @@ class Database:
         await self.grp.update_one({'id': int(id)}, {'$set': {'settings': settings}})
                                   
     async def get_settings(self, id):
+        group = await self.grp.find_one({'id': int(id)})
+        if not group:
+            default = {
+                'button': True,
+                'photo': True,
+                'spell_check': True,
+                'welcome': True,
+                'auto_delete': True,
+                'auto_ffilter': True,
+                'max_btn': True,
+                'template': IMDB_TEMPLATE,
+                'caption': CUSTOM_FILE_CAPTION,
+                'imdb': True,
+                'is_verify': IS_VERIFY,
+                'fsub': AUTH_CHANNELS,
+                'last_indexed_id': 0  # 👈 ADD THIS LINE
+            }
+            await self.grp.insert_one({'id': int(id), 'settings': default})
+            return default
+        return group.get('settings', {})
+        
         default = {
             'button': BUTTON_MODE,
             'botpm': P_TTI_SHOW_OFF,
