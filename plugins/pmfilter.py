@@ -1002,41 +1002,50 @@ async def cb_handler(client: Client, query: CallbackQuery):
         channel_id = int(channel_id)
         current_msg_id = int(current_msg_id)
         
-        # 1. Fetch the last indexed ID from your database settings
+        # 1. Retrieve the last indexed ID from your group settings
         settings = await get_settings(query.message.chat.id)
         last_id = settings.get('last_indexed_id', 0)
         
         if last_id >= current_msg_id:
-            return await query.answer("✨ Already up to date!", show_alert=True)
+            return await query.answer("✨ Everything is already indexed!", show_alert=True)
             
-        await query.message.edit_text(f"⏳ <b>Indexing Started...</b>\nFrom ID: <code>{last_id}</code> to <code>{current_msg_id}</code>\n<i>Safe-mode enabled (0.5s delay)</i>")
+        await query.message.edit_text(
+            f"⏳ <b>Indexing Started...</b>\n"
+            f"From ID: <code>{last_id}</code> to <code>{current_msg_id}</code>\n"
+            f"<i>Safe-mode: 0.5s delay per message</i>"
+        )
         
         saved = 0
         duplicates = 0
         
-        # 2. Start the loop to fetch and save files
+        # 2. Loop through the message range to index files
         try:
             for msg_id in range(last_id + 1, current_msg_id + 1):
                 try:
-                    # Using get_messages as a standard way to fetch by ID
                     m = await client.get_messages(channel_id, msg_id)
-                    if m.document or m.video or m.audio:
-                        # save_file from your ia_filterdb handles duplicates automatically
+                    # Check for documents, videos, or audio files
+                    if m and (m.document or m.video or m.audio):
+                        # Use your existing save_file function which handles duplicate checks
                         sts, _ = await save_file(m.document or m.video or m.audio)
                         if sts: saved += 1
                         else: duplicates += 1
                 except Exception:
-                    pass
+                    continue
                 
-                # Anti-ban delay to prevent FloodWait
+                # Apply 0.5s delay to avoid Telegram FloodWait/bans
                 await asyncio.sleep(0.5) 
             
-            # 3. Update the last indexed ID so you don't repeat the same files next time
+            # 3. Update the database with the new 'last_indexed_id'
             await save_group_settings(query.message.chat.id, 'last_indexed_id', current_msg_id)
-            await query.message.edit_text(f"✅ <b>Indexing Complete!</b>\n\n📥 Saved: `{saved}`\n⏭ Skipped (Duplicates): `{duplicates}`")
+            await query.message.edit_text(
+                f"✅ <b>Indexing Complete!</b>\n\n"
+                f"📥 New Files: `{saved}`\n"
+                f"⏭ Skipped (Duplicates): `{duplicates}`"
+            )
             
         except Exception as e:
-            await query.message.edit_text(f"❌ <b>Error:</b> `{e}`")
+            await query.message.edit_text(f"❌ <b>Error:</b> `{str(e)}`")
+            
     
     elif query.data == "pages":
         await query.answer("ᴛʜɪs ɪs ᴘᴀɢᴇs ʙᴜᴛᴛᴏɴ 😅")
