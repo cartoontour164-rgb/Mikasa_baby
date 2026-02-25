@@ -34,6 +34,9 @@ class script(object):
 🚀 ꜰᴏʟʟᴏᴡ ᴛʜᴇꜱᴇ ꜱᴛᴇᴘꜱ!
 </b>"""
 
+    INDEX_START_TXT = "⏳ <b>Indexing Started...</b> from ID {}"
+    INDEX_COMPLETE_TXT = "✅ <b>Indexing Complete!</b>\n\n📥 Saved: `{}`\n⏭ Skipped: `{}`"
+    
     ABOUT_TXT = """<b>╭────[ ᴍʏ ᴅᴇᴛᴀɪʟs ]────⍟
 ├⍟ Mʏ Nᴀᴍᴇ : <a href=https://t.me/{}>{}</a>
 ├⍟ Dᴇᴠᴇʟᴏᴘᴇʀ : <a href={}>ᴏᴡɴᴇʀ</a> 
